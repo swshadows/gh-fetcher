@@ -6,7 +6,7 @@ class Requester:
         self._username = username
 
     def _get(self):
-        print(f"♣ Requisitando API principal, usuário '{self._username}'")
+        print("Requisitando API principal")
         res = requests.get(f"https://api.github.com/users/{self._username}")
 
         if not res.ok:
@@ -15,7 +15,7 @@ class Requester:
         return res
 
     def _get_repos(self):
-        print(f"♣ Requisitando API de repositório, usuário '{self._username}'")
+        print("Requisitando API de repositório")
         res = requests.get(f"https://api.github.com/users/{self._username}/repos?per_page=100")
 
         if not res.ok:
@@ -24,7 +24,7 @@ class Requester:
         return res
 
     def _get_follows(self):
-        print(f"♣ Requisitando API de seguidores e seguindos, usuário '{self._username}'")
+        print("Requisitando API de seguidores e seguindos")
         res_following = requests.get(f"https://api.github.com/users/{self._username}/following?per_page=100")
 
         if not res_following.ok:
@@ -40,6 +40,7 @@ class Requester:
     def get_data(self):
         data = {}
 
+        print(f"\nIniciando requisições para o usuário '{self._username}'\n")
         main = self._get().json()
         repos = self._get_repos().json()
         followers, following = self._get_follows()

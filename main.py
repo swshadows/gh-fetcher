@@ -9,8 +9,7 @@ req = Requester(username)
 
 
 valid_formats = ["md", "json"]
-print(f"Escolha o formato de saída: [{' | '.join(valid_formats)}]")
-format = input().strip().lower()
+format = input(f"Escolha o formato de saída [{' | '.join(valid_formats)}]: ").strip().lower()
 if format not in valid_formats:
     raise Exception("Formato de saída inválido.")
 

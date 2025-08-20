@@ -2,6 +2,7 @@ from datetime import datetime
 from io import StringIO
 import json
 import os
+import re
 
 
 class Writer:
@@ -12,8 +13,10 @@ class Writer:
         self._path = path
 
     def _mkdirs(self):
-        if not os.path.exists(os.path.dirname(self._path)):
-            os.makedirs(os.path.dirname(self._path), exist_ok=True)
+        dir = os.path.dirname(self._path)
+
+        if not os.path.exists(dir):
+            os.makedirs(dir, exist_ok=True)
 
     def write(self):
         self._mkdirs()
@@ -23,6 +26,8 @@ class Writer:
         else:
             self.write_json()
 
+        print(f"Concluido! Arquivo salvo em {os.path.abspath(self._path)}")
+
     def write_md(self):
         name = self._data.get("name")
         url = self._data.get("url")
@@ -30,7 +35,7 @@ class Writer:
 
         self._buffer.write(f"# <img src='{avatar_url}' alt='{name}' width='40px' /> [{name}]({url})\n\n")
         if bio := self._data.get("bio"):
-            self._buffer.write(f"> {bio}\n")
+            self._buffer.write(f"> {re.sub(r'\r|\n', '', bio) or '`Sem descrição`'}\n")
         if location := self._data.get("location"):
             self._buffer.write(f"- 📍 Localização: {location}\n")
         if email := self._data.get("email"):
