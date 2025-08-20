@@ -16,7 +16,7 @@ class Requester:
 
     def _get_repos(self):
         print(f"♣ Requisitando API de repositório, usuário '{self._username}'")
-        res = requests.get(f"https://api.github.com/users/{self._username}/repos")
+        res = requests.get(f"https://api.github.com/users/{self._username}/repos?per_page=100")
 
         if not res.ok:
             raise Exception(f"Requisição falhou: {res.status_code}")
@@ -25,12 +25,12 @@ class Requester:
 
     def _get_follows(self):
         print(f"♣ Requisitando API de seguidores e seguindos, usuário '{self._username}'")
-        res_following = requests.get(f"https://api.github.com/users/{self._username}/following")
+        res_following = requests.get(f"https://api.github.com/users/{self._username}/following?per_page=100")
 
         if not res_following.ok:
             raise Exception(f"Requisição falhou: {res_following.status_code}")
 
-        res_followers = requests.get(f"https://api.github.com/users/{self._username}/followers")
+        res_followers = requests.get(f"https://api.github.com/users/{self._username}/followers?per_page=100")
 
         if not res_followers.ok:
             raise Exception(f"Requisição falhou: {res_followers.status_code}")
