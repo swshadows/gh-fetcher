@@ -15,17 +15,17 @@ O script permite obter dados de um usuário do Github usando endpoints publicos 
 	```bash
 	python -m venv venv
 	```
-- Instale as dependências
-	```bash
-	pip install -r requirements.txt
-	```
 - Ative o `venv`
 	```bash
 	venv/Scripts/activate
+	```
+- Instale as dependências
+	```bash
+	pip install -r requirements.txt
 	```
 - Execute o script `main.py`
 	```bash
 	python main.py
 	```
 
-O output será gerado na pasta do projeto
+O output será gerado na pasta do projeto, na pasta `output`
